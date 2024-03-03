@@ -127,15 +127,6 @@
 
   let isVisible = false;
 
-  $: isVisible = index === 9 || index === 10;
-  $: {
-    if (index === 10 && previousIndex === 9) {
-      map.panTo([-100, 0], { duration: 2000 }); // Sliding animation to [-100, 0]
-    } else if (index === 9 && previousIndex === 10) {
-      map.panTo([0, 0], { duration: 2000 }); // Sliding animation to [0, 0]
-    }
-    previousIndex = index;
-  }
 </script>
 
 <svelte:head>
@@ -147,13 +138,6 @@
 
 <div class="map" class:visible={isVisible} bind:this={container}></div>
 
-{#if index >= 9 && index <= 10}
-    <input type="range" min="0" max="1440" step="1" bind:value={filterDate} />
-    filtered_trip_data = filterDates(slider_time);
-    slider_label = sliderTimeScale(slider_time);
-
-    <p class="slider-text">Adjust the slider to select a date</p>
-{/if}
 
 <div class="visualization">
   {#each earthquakePoints as data, index}
